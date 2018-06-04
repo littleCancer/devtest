@@ -1,0 +1,3 @@
+module SpecRequestHelper
+
+end
