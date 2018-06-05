@@ -94,8 +94,8 @@ TARGET_GROUPS.each do |target_group|
   name = target_group.fetch(:name)
   external_id = target_group.fetch(:external_id)
 
-  country = Country.find_by!(target_group.fetch(:country_code)) if target_group.key?(:country_code)
-  parent =  TargetGroup.find_by!(target_group.fetch(:external_parent_id)) if target_group.key?(:external_parent_id)
+  country = Country.find_by!(code: target_group.fetch(:country_code)) if target_group.key?(:country_code)
+  parent =  TargetGroup.find_by!(external_id: target_group.fetch(:external_parent_id)) if target_group.key?(:external_parent_id)
 
   panel_provider_id = country ? country.panel_provider_id : parent.panel_provider_id
 
@@ -106,6 +106,21 @@ TARGET_GROUPS.each do |target_group|
   parent.children << target_group if parent
 
 end
+
+
+#location_group - location relations
+
+locations = Location.all
+location_groups = LocationGroup.all
+index = 0
+
+location_groups.each do |location_group|
+  endIndex = index + 7
+  group_locations = locations[index..endIndex]
+  group_locations.each { |group_location| location_group.locations << group_location }
+  index += 3
+end
+
 
 #users
 

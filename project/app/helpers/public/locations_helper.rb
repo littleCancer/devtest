@@ -1,0 +1,2 @@
+module Public::LocationsHelper
+end

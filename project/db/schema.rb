@@ -71,7 +71,9 @@ ActiveRecord::Schema.define(version: 2018_06_04_164251) do
     t.integer "panel_provider_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["external_id"], name: "index_target_groups_on_external_id", unique: true
     t.index ["panel_provider_id"], name: "index_target_groups_on_panel_provider_id"
+    t.index ["parent_id"], name: "index_target_groups_on_parent_id"
   end
 
   create_table "tc_relations", force: :cascade do |t|

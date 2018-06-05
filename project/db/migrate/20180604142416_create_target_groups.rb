@@ -9,9 +9,9 @@ class CreateTargetGroups < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+
+    add_index :target_groups, :external_id, unique: true
+    add_index :target_groups, :parent_id
+
   end
-
-  add_index :target_groups, :external_id, unique: true
-  add_index :target_groups, :parent_id
-
 end
