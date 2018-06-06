@@ -8,7 +8,11 @@ but there is no 'location_group_id' in Location def which would indicate belong_
 I am going with many to many relation for Location and Location Group.
 
 Index name 'index_location_group_location_relations_on_location_id_and_location_group_id' on table 'location_group_location_relations' is too long; the limit is 62 characters
-that is why I had to shorten relations names.
+that is why I had to shorten relations names (not best approach) .
 
 For generating tree struture I used:
 https://github.com/ClosureTree/closure_tree
+
+For using private api appropriate header needs to be indcluded : accept: application/vnd.agency.private+json .
+Furhtermore user has to be part of provider organization i.e. to has panel_provider_id present in order to use private api.
+
