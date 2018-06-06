@@ -13,28 +13,33 @@ RSpec.describe 'Target Groups Api', type: :request do
   let(:provider_id) { panel_provider.id }
   let(:country_code) { country.code }
 
+
+
   describe 'GET /target_groups' do
 
     before do
-      target_groups[0].children << target_groups[1]
-      target_groups[0].children << target_groups[2]
-      target_groups[1].children << target_groups[3]
-      target_groups[1].children << target_groups[4]
-      target_groups[2].children << target_groups[5]
-      target_groups[2].children << target_groups[6]
+      puts "countries  ==== before}"
 
-      target_groups[7].children << target_groups[8]
-      target_groups[7].children << target_groups[9]
-      target_groups[8].children << target_groups[10]
-      target_groups[8].children << target_groups[11]
-      target_groups[9].children << target_groups[12]
-      target_groups[9].children << target_groups[13]
+      # target_groups[0].children << target_groups[1]
+      # target_groups[0].children << target_groups[2]
+      # target_groups[1].children << target_groups[3]
+      # target_groups[1].children << target_groups[4]
+      # target_groups[2].children << target_groups[5]
+      # target_groups[2].children << target_groups[6]
+      #
+      # target_groups[7].children << target_groups[8]
+      # target_groups[7].children << target_groups[9]
+      # target_groups[8].children << target_groups[10]
+      # target_groups[8].children << target_groups[11]
+      # target_groups[9].children << target_groups[12]
+      # target_groups[9].children << target_groups[13]
 
-      country.target_groups << target_groups[0]
-      country.target_groups << target_groups[7]
+      # country.target_groups << target_groups[0]
+      # country.target_groups << target_groups[7]
+      #
+      # panel_provider.countries << country
 
-      panel_provider.countries << country
-
+      puts "countries  ==== #{country.target_groups}"
 
     end
 
@@ -51,7 +56,10 @@ RSpec.describe 'Target Groups Api', type: :request do
       end
 
       it 'returns target groups list' do
-        expect(json).not_to be_empty
+        puts "oce da vrati lists ============================="
+        puts "countries  ==== #{country.panel_provider.code}"
+        puts "oce da vrati lists amaaaaaan"
+
         expect(json.size).to eq(14)
       end
 
@@ -120,7 +128,7 @@ RSpec.describe 'Target Groups Api', type: :request do
         expect(response).to have_http_status(403)
       end
 
-      it 'returns not authorized message' do
+      it 'returns forbidden message' do
         expect(response.body).to match(/Forbidden/)
       end
 

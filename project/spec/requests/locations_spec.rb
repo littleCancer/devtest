@@ -19,6 +19,7 @@ RSpec.describe  'Locations API', type: :request do
 
     before do
 
+      puts "noramal vefore"
       panel_provider.countries << country
       country.location_groups << location_group_east
       country.location_groups << location_group_west
@@ -105,7 +106,7 @@ RSpec.describe  'Locations API', type: :request do
           expect(response).to have_http_status(403)
         end
 
-        it 'returns not authorized message' do
+        it 'returns not forbidden message' do
           expect(response.body).to match(/Forbidden/)
         end
 

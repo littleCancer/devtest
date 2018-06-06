@@ -3,7 +3,6 @@ class Private::LocationsController < ApplicationController
   before_action :set_country, only: [:index]
 
   def index
-
     @locations = Location.joins(:location_relations)
                      .where(location_relations: { location_group: @country
                                                                       .location_groups.joins(:location_relations) } )
