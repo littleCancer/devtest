@@ -16,3 +16,7 @@ https://github.com/ClosureTree/closure_tree
 For using private api appropriate header needs to be indcluded : accept: application/vnd.agency.private+json .
 Furhtermore user has to be part of provider organization i.e. to has panel_provider_id present in order to use private api.
 
+== Caused by : Closure Tree implementation of adding children. Assume it will be fixed soon. 
+DEPRECATION WARNING: Dangerous query method (method whose arguments are used as raw SQL) called with non-attribute argument(s): "\"target_group_hierarchies\".generations asc". Non-attribute arguments will be disallowed in Rails 6.0. This method should not be called with user-provided values, such as request parameters or model attributes. Known-safe values can be passed by wrapping them in Arel.sql(). (called from block (3 levels) in <main> at /Users/stevanrakic/Smart/Rails/Volcano/project/spec/requests/target_groups_spec.rb:24)
+
+
