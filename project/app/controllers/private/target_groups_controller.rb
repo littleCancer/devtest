@@ -1,4 +1,4 @@
-class Private::TargetGroupsController < ApplicationController
+class Private::TargetGroupsController < Private::PrivateApiController
 
   before_action :set_country, only: [:index]
 

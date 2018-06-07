@@ -20,122 +20,122 @@ RSpec.describe 'Target Groups Api', type: :request do
     before do
       puts "countries  ==== before}"
 
-      # target_groups[0].children << target_groups[1]
-      # target_groups[0].children << target_groups[2]
-      # target_groups[1].children << target_groups[3]
-      # target_groups[1].children << target_groups[4]
-      # target_groups[2].children << target_groups[5]
-      # target_groups[2].children << target_groups[6]
-      #
-      # target_groups[7].children << target_groups[8]
-      # target_groups[7].children << target_groups[9]
-      # target_groups[8].children << target_groups[10]
-      # target_groups[8].children << target_groups[11]
-      # target_groups[9].children << target_groups[12]
-      # target_groups[9].children << target_groups[13]
+      target_groups[0].children << target_groups[1]
 
-      # country.target_groups << target_groups[0]
-      # country.target_groups << target_groups[7]
-      #
-      # panel_provider.countries << country
+      target_groups[0].children << target_groups[2]
+      target_groups[1].children << target_groups[3]
+      target_groups[1].children << target_groups[4]
+      target_groups[2].children << target_groups[5]
+      target_groups[2].children << target_groups[6]
+
+      target_groups[7].children << target_groups[8]
+      target_groups[7].children << target_groups[9]
+      target_groups[8].children << target_groups[10]
+      target_groups[8].children << target_groups[11]
+      target_groups[9].children << target_groups[12]
+      target_groups[9].children << target_groups[13]
+
+      country.target_groups << target_groups[0]
+      country.target_groups << target_groups[7]
+
+      panel_provider.countries << country
 
       puts "countries  ==== #{country.target_groups}"
 
     end
 
+    context 'public api' do
+
+      before { get "/target_groups/#{provider_id}?country_code=#{country_code}", headers: headers }
+
+      context 'when country exists' do
+
+        it 'returns status code 200' do
+          expect(response).to have_http_status(200)
+        end
+
+        it 'returns target groups list' do
+          puts "oce da vrati lists ============================="
+          puts "countries  ==== #{country.panel_provider.code}"
+          puts "oce da vrati lists amaaaaaan"
+
+          expect(json.size).to eq(14)
+        end
+
+      end
+
+      context 'when country does not exist' do
+
+        let(:country_code) { 'foocode' }
+
+        it 'returns status code 404' do
+          expect(response).to have_http_status(404)
+        end
+
+        it 'returns not found message' do
+          expect(response.body).to match(/Couldn't find Country/)
+        end
+
+      end
+
+
+    end
+
+    context 'private api' do
+
+      before do
+        get "/target_groups/#{provider_id}?country_code=#{country_code}", headers: headers
+      end
+
+      context 'when country exists' do
+
+        let(:user) { create(:user, panel_provider_id: panel_provider.id) }
+        let(:headers) { valid_headers_private_api }
+
+        it 'returns status code 200' do
+          expect(response).to have_http_status(200)
+        end
+
+        it 'returns location list' do
+          expect(json).not_to be_empty
+          expect(json.size).to eq(14)
+        end
+
+      end
+
+      context 'when country does not exist' do
+
+        let(:user) { create(:user, panel_provider_id: panel_provider.id) }
+        let(:headers) { valid_headers_private_api }
+        let(:country_code) { 'foocode' }
+
+        it 'returns status code 404' do
+          expect(response).to have_http_status(404)
+        end
+
+        it 'returns not found message' do
+          expect(response.body).to match(/Couldn't find Country/)
+        end
+
+      end
+
+      context 'when user has no rights to access private api' do
+
+        let(:headers) { valid_headers_private_api }
+
+        it 'returns status code 403' do
+          expect(response).to have_http_status(403)
+        end
+
+        it 'returns forbidden message' do
+          expect(response.body).to match(/Forbidden/)
+        end
+
+      end
+
+    end
+
   end
-
-  context 'public api' do
-
-    before { get "/target_groups/#{provider_id}?country_code=#{country_code}", headers: headers }
-
-    context 'when country exists' do
-
-      it 'returns status code 200' do
-        expect(response).to have_http_status(200)
-      end
-
-      it 'returns target groups list' do
-        puts "oce da vrati lists ============================="
-        puts "countries  ==== #{country.panel_provider.code}"
-        puts "oce da vrati lists amaaaaaan"
-
-        expect(json.size).to eq(14)
-      end
-
-    end
-
-    context 'when country does not exist' do
-
-      let(:country_code) { 'foocode' }
-
-      it 'returns status code 404' do
-        expect(response).to have_http_status(404)
-      end
-
-      it 'returns not found message' do
-        expect(response.body).to match(/Couldn't find Country/)
-      end
-
-    end
-
-
-  end
-
-  context 'private api' do
-
-    before do
-      get "/target_groups/#{provider_id}?country_code=#{country_code}", headers: headers
-    end
-
-    context 'when country exists' do
-
-      let(:user) { create(:user, panel_provider_id: panel_provider.id) }
-      let(:headers) { valid_headers_private_api }
-
-      it 'returns status code 200' do
-        expect(response).to have_http_status(200)
-      end
-
-      it 'returns location list' do
-        expect(json).not_to be_empty
-        expect(json.size).to eq(14)
-      end
-
-    end
-
-    context 'when country does not exist' do
-
-      let(:user) { create(:user, panel_provider_id: panel_provider.id) }
-      let(:headers) { valid_headers_private_api }
-      let(:country_code) { 'foocode' }
-
-      it 'returns status code 404' do
-        expect(response).to have_http_status(404)
-      end
-
-      it 'returns not found message' do
-        expect(response.body).to match(/Couldn't find Country/)
-      end
-
-    end
-
-    context 'when user has no rights to access private api' do
-
-      let(:headers) { valid_headers_private_api }
-
-      it 'returns status code 401' do
-        expect(response).to have_http_status(403)
-      end
-
-      it 'returns forbidden message' do
-        expect(response.body).to match(/Forbidden/)
-      end
-
-    end
-
-  end
-
 
 
 end

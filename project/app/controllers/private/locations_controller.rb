@@ -1,4 +1,4 @@
-class Private::LocationsController < ApplicationController
+class Private::LocationsController < Private::PrivateApiController
 
   before_action :set_country, only: [:index]
 

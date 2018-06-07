@@ -117,7 +117,7 @@ index = 0
 location_groups.each do |location_group|
   endIndex = index + 7
   group_locations = locations[index..endIndex]
-  group_locations.each { |group_location| location_group.locations << group_location }
+  location_group.locations << group_locations
   index += 3
 end
 
