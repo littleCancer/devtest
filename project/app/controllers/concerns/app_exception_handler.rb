@@ -39,7 +39,7 @@ module AppExceptionHandler
   end
 
   def not_found(e)
-    json_response({ message: e.message }, :not_found)
+    json_response({ message: 'Bad Params' }, :not_found)
   end
 
   def forbidden(e)

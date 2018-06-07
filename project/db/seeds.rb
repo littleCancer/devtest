@@ -33,7 +33,8 @@ LOCATIONS = [
   { name: "Charlotte" },
   { name: "Detroit" },
   { name: "El Paso" },
-  { name: "Seattle" }
+  { name: "Seattle" },
+  { name: "Miami" }
 ].freeze
 
 TARGET_GROUPS = [
@@ -65,7 +66,7 @@ TARGET_GROUPS = [
     { name: 'Winter Rock', external_id: 'wtr', external_parent_id: 'roc'},
     { name: 'For Ladies', external_id: 'fol', external_parent_id: 'pop'},
     { name: 'Winter Delight', external_id: 'wde', external_parent_id: 'pop'}
-]
+].freeze
 
 PANEL_PROVIDERS_CODES.each { |panel_provider_code| PanelProvider.create!(code: panel_provider_code) }
 
@@ -115,10 +116,10 @@ location_groups = LocationGroup.all
 index = 0
 
 location_groups.each do |location_group|
-  endIndex = index + 7
+  endIndex = index + 8
   group_locations = locations[index..endIndex]
   location_group.locations << group_locations
-  index += 3
+  index += 4
 end
 
 
