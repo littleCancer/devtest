@@ -19,7 +19,6 @@ RSpec.describe  'Locations API', type: :request do
 
     before do
 
-      puts "noramal vefore"
       panel_provider.countries << country
       country.location_groups << location_group_east
       country.location_groups << location_group_west

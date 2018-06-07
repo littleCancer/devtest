@@ -18,8 +18,6 @@ RSpec.describe 'Target Groups Api', type: :request do
   describe 'GET /target_groups' do
 
     before do
-      puts "countries  ==== before}"
-
       target_groups[0].children << target_groups[1]
 
       target_groups[0].children << target_groups[2]
@@ -40,7 +38,6 @@ RSpec.describe 'Target Groups Api', type: :request do
 
       panel_provider.countries << country
 
-      puts "countries  ==== #{country.target_groups}"
 
     end
 
@@ -55,10 +52,6 @@ RSpec.describe 'Target Groups Api', type: :request do
         end
 
         it 'returns target groups list' do
-          puts "oce da vrati lists ============================="
-          puts "countries  ==== #{country.panel_provider.code}"
-          puts "oce da vrati lists amaaaaaan"
-
           expect(json.size).to eq(14)
         end
 

@@ -13,7 +13,7 @@ RSpec.describe 'Pricing Api' do
   let!(:country) { create(:country, panel_provider_id: panel_provider.id) }
   let(:country_code) { country.code }
 
-  let!(:target_group) { create(:target_group) }
+  let!(:target_group) { create(:target_group, panel_provider_id: panel_provider.id) }
   let (:target_group_id) { target_group.id }
 
   let(:headers) { valid_headers_private_api }
