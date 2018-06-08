@@ -8,7 +8,7 @@ class Validations::PriceParamsValidator
   validates :country_code, presence: true
   validates :target_group_id, presence: true
   validates :locations, presence: true
-  validates_length_of :locations, minimum: 10
+  validates_length_of :locations, minimum: 5
   validate :country_integrity
   validate :target_group_integrity
   validate :locations_integrity
@@ -18,7 +18,6 @@ class Validations::PriceParamsValidator
     @country_code = params[:country_code]
     @target_group_id = params[:target_group_id]
     @locations = params[:locations]
-
     params.require(:pricing).permit(:country_code, :target_group_id,
                                                     :locations)
   end

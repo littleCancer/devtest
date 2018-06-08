@@ -25,8 +25,9 @@ class Private::PricingController < Private::PrivateApiController
     if price_params.valid?
       @panel_provider = PanelProvider.find(price_params.country.panel_provider_id)
     else
+
       raise(AppExceptionHandler::InvalidParams,
-            "Validation failed errors:#{price_params.errors}")
+            "Validation failed errors:#{price_params.errors.first}")
 
     end
 

@@ -19,6 +19,7 @@ class Public::LocationsController < ApplicationController
   def set_country
     panel_provider = PanelProvider.find_by!(id: params[:provider_id])
     @country = panel_provider.countries.find_by!(code: params[:country_code])
+
   end
 
 end

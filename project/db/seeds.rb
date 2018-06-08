@@ -133,4 +133,5 @@ User.create!(name: 'Normal User',
 User.create!(name: 'Provider Member',
              email: 'thor@asgard.net',
              password: 'foobar',
-             password_confirmation: 'foobar')
+             password_confirmation: 'foobar',
+             panel_provider_id: 2)
